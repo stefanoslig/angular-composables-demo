@@ -1,9 +1,9 @@
 import { Route } from '@angular/router';
-import { StudentsComponent } from './students/students.component';
-import { TeachersComponent } from './teachers/teachers.component';
+import { MouseTrackerComponent } from './mouse-tracker/mouse-tracker.component';
+import { UsersComponent } from './users/users.component';
 
 export const appRoutes: Route[] = [
-  { path: '', redirectTo: '/students', pathMatch: 'full' },
-  { path: 'students', component: StudentsComponent },
-  { path: 'teachers', component: TeachersComponent },
+  { path: '', redirectTo: '/mouse-tracker', pathMatch: 'full' },
+  { path: 'mouse-tracker', component: MouseTrackerComponent },
+  { path: 'users', component: UsersComponent },
 ];

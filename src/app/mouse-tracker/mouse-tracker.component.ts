@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, isSignal } from '@angular/core';
 import { useMouse } from '../composables/mouse-tracker';
 
 @Component({
   standalone: true,
   template: ` {{ mouse.x() }} {{ mouse.y() }} `,
 })
-export class StudentsComponent {
+export class MouseTrackerComponent {
   mouse = useMouse();
 }
