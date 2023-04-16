@@ -11,16 +11,14 @@ const baseUrl = 'https://jsonplaceholder.typicode.com/users/';
     <button *ngFor="let i of buttons" (click)="id.set(i)">
       {{ i }}
     </button>
-
-    <div v-if="error">
-      <!-- <p>Oops! Error encountered: {{ fetch.error()?.message }}</p> -->
-      <button (click)="(fetch.retry)">Retry</button>
+    <div *ngIf="fetch.error()">
+      <p>Oops! Error encountered: {{ fetch.error()?.message }}</p>
+      <button (click)="fetch.retry()">Retry</button>
     </div>
-    <div *ngIf="fetch.data(); else elseBlock">
+    <div *ngIf="fetch.data()">
       Data loaded:
       <pre>{{ fetch.data() | json }}</pre>
     </div>
-    <ng-template #elseBlock>Loading...</ng-template>
   `,
   imports: [NgFor, JsonPipe, NgIf],
 })

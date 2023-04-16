@@ -1,4 +1,5 @@
 import { Signal, effect, signal } from '@angular/core';
+import { timeout } from '../utils/timeout';
 
 export function useFetch<D>(url: Signal<string>) {
   const data = signal<D | null>(null);
@@ -13,7 +14,7 @@ export function useFetch<D>(url: Signal<string>) {
 
       const res = await fetch(urlValue);
       data.set(await res.json());
-      error.set(null)
+      error.set(null);
     } catch (e) {
       data.set(null);
       error.set(e as Error);
@@ -23,17 +24,4 @@ export function useFetch<D>(url: Signal<string>) {
   effect(doFetch);
 
   return { data, error, retry: doFetch };
-}
-
-// artificial delay
-function timeout() {
-  return new Promise<void>((resolve, reject) => {
-    setTimeout(() => {
-      if (Math.random() > 0.3) {
-        resolve();
-      } else {
-        reject(new Error('Random Error'));
-      }
-    }, 300);
-  });
 }
