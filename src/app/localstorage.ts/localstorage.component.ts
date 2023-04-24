@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { useLocalStorage } from '../composables/storage';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   standalone: true,
