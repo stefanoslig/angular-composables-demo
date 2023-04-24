@@ -8,7 +8,8 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   template: `
     <header>
       <a routerLink="/mouse-tracker">Mouse Tracker</a> |
-      <a routerLink="/users">Users</a>
+      <a routerLink="/users">Users</a> |
+      <a routerLink="/storage">Storage</a>
     </header>
     <router-outlet></router-outlet>
   `,
