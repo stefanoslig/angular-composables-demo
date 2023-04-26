@@ -1,14 +1,9 @@
-import { DestroyRef, inject, signal } from '@angular/core';
+import { DestroyRef, effect, inject, signal } from '@angular/core';
 import { parseValue } from '../utils/parse-value';
 
 export function useLocalStorage(key: string) {
   // state encapsulated and managed by the composable
   const value = signal('');
-
-  const onDestroy = () => {
-    localStorage.setItem(key, JSON.stringify(value()));
-    window.removeEventListener('storage', handler);
-  };
 
   const serializedVal = localStorage.getItem(key);
   if (serializedVal !== null) {
@@ -24,9 +19,14 @@ export function useLocalStorage(key: string) {
 
   window.addEventListener('storage', handler, true);
 
+  effect(() => {
+    localStorage.setItem(key, JSON.stringify(value()));
+  });
+
   // lifecycle to teardown side effects.
-  inject(DestroyRef).onDestroy(onDestroy);
-  window.onbeforeunload = onDestroy;
+  inject(DestroyRef).onDestroy(() =>
+    window.removeEventListener('storage', handler)
+  );
 
   // expose managed state as return value
   return { value };
